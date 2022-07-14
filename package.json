@@ -1,18 +1,14 @@
 {
-  "name": "spendminimum.com",
+  "name": "spendminimum Next.JS Template",
   "version": "1.0.1",
-  "description": "Technical Consultant, Development Blogs",
+  "description": "Next.JS Template",
   "keywords": [
     "next.js",
     "prisma",
     "website development",
-    "google ads",
-    "adwords",
-    "twilio",
-    "digital marketing"
   ],
   "main": "index.js",
-  "repository": "https://github.com/yashsingh3/spendminimum.git",
+  "repository": "https://github.com/spendminimum-com/Next.Js-Skeleton",
   "author": "Yashas <yashas.s.b@gmail.com>",
   "license": "UNLICENSED",
   "private": true,
