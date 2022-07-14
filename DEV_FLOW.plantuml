@@ -1,0 +1,30 @@
+@startuml SPENMINNIMUM_DEV_FLOW
+allow_mixing
+rectangle Create_NEXT_APP{
+    usecase "Open VSCODE Terminal" as STEP0
+    usecase ">YARN CREATE NEXT-APP spendminimum.com" as STEP1
+    usecase ">CD spendminimum.com" as STEP2
+    usecase ">YARN DEV" as STEP3
+}
+
+rectangle Check_APP {
+    
+    usecase "Open Chrome/Any Browser" as STEP4
+    usecase "Goto http://localhost:3000" as STEP5
+}
+
+rectangle Setting_APP_For_Prod {
+    
+    usecase "Open Chrome/Any Browser" as STEP6
+    usecase "Goto http://localhost:3000" as STEP7
+}
+
+STEP0 --> STEP1
+STEP1 --> STEP2
+Create_NEXT_APP ---> Check_APP : Check If Installed Properly?
+Create_NEXT_APP <- Check_APP : If not Installed Properly.
+STEP2 --> STEP3
+STEP3 --> STEP4
+STEP4 --> STEP5
+
+@enduml
