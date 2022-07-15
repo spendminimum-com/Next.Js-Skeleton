@@ -29,8 +29,8 @@ export const PageInfo3 = objectType({
   },
 });
 
-export const Response = objectType({
-  name: 'Response',
+export const Response3 = objectType({
+  name: 'Response3',
   definition(t) {
     t.field('pageInfo3', { type: PageInfo3 });
     t.list.field('edges3', {
@@ -42,8 +42,8 @@ export const Response = objectType({
 export const sessionQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.field('Link', {
-      type: 'Response',
+    t.field('Link3', {
+      type: 'Response3',
       args: {
         first: intArg(),
         after: stringArg(),
@@ -51,7 +51,7 @@ export const sessionQuery = extendType({
       async resolve(_, args, ctx) {
         let queryResults = null;
         if (args.after) {
-          queryResults = await ctx.prisma.Session.findMany({
+          queryResults = await ctx.prisma.session.findMany({
             take: args.first,
             skip: 1,
             cursor: {
@@ -59,14 +59,14 @@ export const sessionQuery = extendType({
             },
           });
         } else {
-          queryResults = await ctx.prisma.Session.findMany({
+          queryResults = await ctx.prisma.session.findMany({
             take: args.first,
           });
         }
         if (queryResults.length > 0) {
           const lastLinkInResults = queryResults[queryResults.length - 1];
           const myCursor = lastLinkInResults.id;
-          const secondQueryResults = await ctx.prisma.Session.findMany({
+          const secondQueryResults = await ctx.prisma.session.findMany({
             take: args.first,
             cursor: {
               id: myCursor,

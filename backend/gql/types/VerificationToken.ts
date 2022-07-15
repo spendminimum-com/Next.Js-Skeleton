@@ -10,8 +10,8 @@ export const VerificationToken = objectType({
   },
 });
 
-export const Edge5 = objectType({
-  name: 'Edge5',
+export const Edge6 = objectType({
+  name: 'Edge6',
   definition(t) {
     t.string('cursor');
     t.field('node', {
@@ -20,20 +20,20 @@ export const Edge5 = objectType({
   },
 });
 
-export const PageInfo5 = objectType({
-  name: 'PageInfo5',
+export const PageInfo6 = objectType({
+  name: 'PageInfo6',
   definition(t) {
     t.string('endCursor');
     t.boolean('hasNextPage');
   },
 });
 
-export const Response = objectType({
-  name: 'Response',
+export const Response6 = objectType({
+  name: 'Response6',
   definition(t) {
-    t.field('pageInfo5', { type: PageInfo5 });
-    t.list.field('edges5', {
-      type: Edge5,
+    t.field('pageInfo6', { type: PageInfo6 });
+    t.list.field('edges6', {
+      type: Edge6,
     });
   },
 });
@@ -41,8 +41,8 @@ export const Response = objectType({
 export const vertokQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.field('Link', {
-      type: 'Response',
+    t.field('Link6', {
+      type: 'Response6',
       args: {
         first: intArg(),
         after: stringArg(),
@@ -73,17 +73,24 @@ export const vertokQuery = extendType({
               },
             });
           const result = {
-            pageInfo5: {
+            pageInfo6: {
               endCursor: myCursor,
               hasNextPage: secondQueryResults.length >= args.first,
             },
-            edges5: queryResults.map((Link) => ({
+            edges6: queryResults.map((Link) => ({
               cursor: Link.id,
               node: Link,
             })),
           };
           return result;
         }
+        return {
+          pageInfo6: {
+            endCursor: null,
+            hasNextPage: false,
+          },
+          edges6: [],
+        };
       },
     });
   },

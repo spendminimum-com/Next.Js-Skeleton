@@ -16,8 +16,8 @@ export const Post = objectType({
   },
 });
 
-export const Edge = objectType({
-  name: 'Edge',
+export const Edge4 = objectType({
+  name: 'Edge4',
   definition(t) {
     t.string('cursor');
     t.field('node', {
@@ -26,20 +26,20 @@ export const Edge = objectType({
   },
 });
 
-export const PageInfo = objectType({
-  name: 'PageInfo',
+export const PageInfo4 = objectType({
+  name: 'PageInfo4',
   definition(t) {
     t.string('endCursor');
     t.boolean('hasNextPage');
   },
 });
 
-export const Response = objectType({
-  name: 'Response',
+export const Response4 = objectType({
+  name: 'Response4',
   definition(t) {
-    t.field('pageInfo', { type: PageInfo });
-    t.list.field('edges', {
-      type: Edge,
+    t.field('pageInfo4', { type: PageInfo4 });
+    t.list.field('edges4', {
+      type: Edge4,
     });
   },
 });
@@ -47,8 +47,8 @@ export const Response = objectType({
 export const postQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.field('Link', {
-      type: 'Response',
+    t.field('Link4', {
+      type: 'Response4',
       args: {
         first: intArg(),
         after: stringArg(),
@@ -59,9 +59,7 @@ export const postQuery = extendType({
           queryResults = await ctx.prisma.post.findMany({
             take: args.first,
             skip: 1,
-            cursor: {
-              id: args.after,
-            },
+            cursor: { id: args.after },
           });
         } else {
           queryResults = await ctx.prisma.post.findMany({
@@ -78,11 +76,11 @@ export const postQuery = extendType({
             },
           });
           const result = {
-            pageInfo: {
+            pageInfo4: {
               endCursor: myCursor,
               hasNextPage: secondQueryResults.length >= args.first,
             },
-            edges: queryResults.map((Link) => ({
+            edges4: queryResults.map((Link) => ({
               cursor: Link.id,
               node: Link,
             })),
@@ -90,11 +88,11 @@ export const postQuery = extendType({
           return result;
         }
         return {
-          pageInfo: {
+          pageInfo4: {
             endCursor: null,
             hasNextPage: false,
           },
-          edges: [],
+          edges4: [],
         };
       },
     });

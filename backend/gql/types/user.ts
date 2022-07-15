@@ -17,8 +17,8 @@ export const User = objectType({
   },
 });
 
-export const Edge4 = objectType({
-  name: 'Edge4',
+export const Edge5 = objectType({
+  name: 'Edge5',
   definition(t) {
     t.string('cursor');
     t.field('node', {
@@ -27,20 +27,20 @@ export const Edge4 = objectType({
   },
 });
 
-export const PageInfo4 = objectType({
-  name: 'PageInfo4',
+export const PageInfo5 = objectType({
+  name: 'PageInfo5',
   definition(t) {
     t.string('endCursor');
     t.boolean('hasNextPage');
   },
 });
 
-export const Response4 = objectType({
-  name: 'Response',
+export const Response5 = objectType({
+  name: 'Response5',
   definition(t) {
-    t.field('pageInfo4', { type: PageInfo4 });
-    t.list.field('edges4', {
-      type: Edge4,
+    t.field('pageInfo5', { type: PageInfo5 });
+    t.list.field('edges', {
+      type: Edge5,
     });
   },
 });
@@ -48,8 +48,8 @@ export const Response4 = objectType({
 export const userQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.field('Link', {
-      type: 'Response',
+    t.field('Link5', {
+      type: 'Response5',
       args: {
         first: intArg(),
         after: stringArg(),
@@ -79,11 +79,11 @@ export const userQuery = extendType({
             },
           });
           const result = {
-            pageInfo4: {
+            pageInfo5: {
               endCursor: myCursor,
               hasNextPage: secondQueryResults.length >= args.first,
             },
-            edges4: queryResults.map((Link) => ({
+            edges5: queryResults.map((Link) => ({
               cursor: Link.id,
               node: Link,
             })),
@@ -91,11 +91,11 @@ export const userQuery = extendType({
           return result;
         }
         return {
-          pageInfo4: {
+          pageInfo5: {
             endCursor: null,
             hasNextPage: false,
           },
-          edges4: [],
+          edges5: [],
         };
       },
     });

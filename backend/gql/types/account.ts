@@ -39,8 +39,8 @@ export const PageInfo2 = objectType({
   },
 });
 
-export const Response = objectType({
-  name: 'Response',
+export const Response2 = objectType({
+  name: 'Response2',
   definition(t) {
     t.field('pageInfo2', { type: PageInfo2 });
     t.list.field('edges2', {
@@ -52,8 +52,8 @@ export const Response = objectType({
 export const accountQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.field('Link', {
-      type: 'Response',
+    t.field('Link2', {
+      type: 'Response2',
       args: {
         first: intArg(),
         after: stringArg(),
